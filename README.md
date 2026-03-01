@@ -74,6 +74,7 @@ app/
   components/
     PortfolioShell.tsx       # Creative shell (intro + staged sections)
     MinimalPortfolioShell.tsx# Minimal shell
+    SoundEffectsProvider.tsx # Creative-only sound effects provider
     Hero.tsx                 # Creative hero section
     ToolsChamber.tsx         # Creative tools section
     ProjectsSection.tsx      # Creative projects + external confirm flow
@@ -163,6 +164,21 @@ Design notes:
 - `SiteBootIntro` provides startup lock screen behavior before entering creative mode.
 - Hero and projects include kinetic hover/entrance effects using GSAP timelines.
 - Additional ambient effects are layered through `AsciiBackground`, `ScrollFx`, and overlay styles in `globals.css`.
+
+### Sound behavior
+
+- Sound effects are enabled **only in creative mode** (`/?mode=neo`).
+- Minimal/professional mode (`/?mode=minimal`) runs with no hover/click/scroll/loading SFX.
+- The provider is scoped in `app/page.tsx` by wrapping `PortfolioShell` with `SoundEffectsProvider` only.
+
+---
+
+## Performance Notes (Non-visual)
+
+- Creative and minimal shells are dynamically loaded from `app/page.tsx` to reduce initial JS on the selector screen.
+- `ScrollFx` uses `requestAnimationFrame` scheduling for scroll/resize updates to reduce main-thread pressure.
+- `AsciiBackground` is memoized and uses precomputed particle styles to cut avoidable render allocations.
+- Ambient overlays use compositor-friendly hints (`contain`, `will-change`) in `app/globals.css` with no appearance change.
 
 ---
 
