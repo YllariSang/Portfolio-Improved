@@ -72,7 +72,7 @@ export const portfolioData = {
     },
     {
       title: "Air2Holiday System",
-      stack: "Symfony • Laravel • Deno • MySQL",
+      stack: "HTML • Laravel • PHP • MySQL • JavaScript • Tailwind",
       summary:
         "Github repo of a mock airline booking system built with Next.js, featuring a custom CMS and API for managing flights and reservations.",
       workUrl: "https://github.com/YllariSang/Air2Holiday-System",
