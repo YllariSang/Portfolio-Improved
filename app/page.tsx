@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import PortfolioShell from "./components/PortfolioShell";
@@ -63,7 +63,7 @@ function ModeSelector({ onSelect }: { onSelect: (mode: PortfolioMode) => void })
   );
 }
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<PortfolioMode | null>(null);
@@ -93,4 +93,12 @@ export default function Home() {
   }
 
   return <PortfolioShell onReturnToSelector={handleReturnToSelector} />;
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
+  );
 }
