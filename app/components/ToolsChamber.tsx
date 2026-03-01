@@ -64,8 +64,10 @@ export default function ToolsChamber() {
       return;
     }
 
+    const amount = Math.round(trackRef.current.clientWidth * 0.82);
+
     trackRef.current.scrollBy({
-      left: direction === "left" ? -320 : 320,
+      left: direction === "left" ? -amount : amount,
       behavior: "smooth",
     });
   };
@@ -73,13 +75,13 @@ export default function ToolsChamber() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-16 w-full max-w-7xl px-6 md:mt-24"
+      className="mx-auto mt-12 w-full max-w-7xl px-4 sm:mt-16 sm:px-6 md:mt-24"
     >
-      <div className="tools-panel chamfer-panel relative overflow-hidden px-6 py-8 md:px-8 md:py-10">
+      <div className="tools-panel chamfer-panel relative overflow-hidden px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
         <span className="micro-tag">{toolsUi.moduleTag}</span>
 
-        <div className="mt-4 flex items-end justify-between gap-4">
-          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-4 py-2 text-2xl font-black uppercase tracking-[0.12em] text-zzz-yellow md:text-4xl">
+        <div className="mt-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
+          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-3 py-2 text-xl font-black uppercase tracking-[0.1em] text-zzz-yellow sm:px-4 sm:text-2xl sm:tracking-[0.12em] md:text-4xl">
             {toolsUi.title}
           </h2>
           <span className="micro-tag">{toolsUi.feedTag}</span>
@@ -107,10 +109,10 @@ export default function ToolsChamber() {
           </div>
         </div>
 
-        <div className="revolver-nav-wrap mt-7">
-          <button type="button" className="revolver-nav" onClick={() => moveTrack("left")}>◀</button>
+        <div className="revolver-nav-wrap mt-6 sm:mt-7">
+          <button type="button" className="revolver-nav" onClick={() => moveTrack("left")} aria-label="Scroll tools left">◀</button>
           <span className="micro-tag">{toolsUi.scrollTag}</span>
-          <button type="button" className="revolver-nav" onClick={() => moveTrack("right")}>▶</button>
+          <button type="button" className="revolver-nav" onClick={() => moveTrack("right")} aria-label="Scroll tools right">▶</button>
         </div>
 
         <div

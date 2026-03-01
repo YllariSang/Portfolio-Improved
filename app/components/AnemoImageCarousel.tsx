@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { type KeyboardEvent, useState } from "react";
+import { type KeyboardEvent, useEffect, useState } from "react";
 
 type TributeFrame = {
   src: string;
@@ -17,13 +17,38 @@ type AnemoImageCarouselProps = {
 
 export default function AnemoImageCarousel({ frames }: AnemoImageCarouselProps) {
   const [startIndex, setStartIndex] = useState(0);
+  const [viewportMode, setViewportMode] = useState<"mobile" | "tablet" | "desktop">("desktop");
 
   if (frames.length === 0) {
     return null;
   }
 
-  const visibleCount = Math.min(3, frames.length);
-  const step = 3;
+  useEffect(() => {
+    const updateViewportMode = () => {
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        setViewportMode("mobile");
+        return;
+      }
+
+      if (window.matchMedia("(max-width: 1024px)").matches) {
+        setViewportMode("tablet");
+        return;
+      }
+
+      setViewportMode("desktop");
+    };
+
+    updateViewportMode();
+    window.addEventListener("resize", updateViewportMode);
+
+    return () => {
+      window.removeEventListener("resize", updateViewportMode);
+    };
+  }, []);
+
+  const baseCount = viewportMode === "mobile" ? 1 : viewportMode === "tablet" ? 2 : 3;
+  const visibleCount = Math.min(baseCount, frames.length);
+  const step = visibleCount;
   const showControls = frames.length > visibleCount;
 
   const visibleFrames = Array.from({ length: visibleCount }, (_, offset) => {
@@ -78,7 +103,11 @@ export default function AnemoImageCarousel({ frames }: AnemoImageCarouselProps) 
                   src={frame.src}
                   alt={frame.alt}
                   fill
-                  sizes="(max-width: 768px) 33vw, 320px"
+                  sizes={viewportMode === "mobile"
+                    ? "(max-width: 640px) 100vw, 100vw"
+                    : viewportMode === "tablet"
+                      ? "(max-width: 1024px) 50vw, 50vw"
+                      : "(max-width: 1536px) 33vw, 320px"}
                   className="object-cover"
                 />
               </div>
@@ -104,18 +133,18 @@ export default function AnemoImageCarousel({ frames }: AnemoImageCarouselProps) 
       </div>
 
       {showControls ? (
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <button type="button" onClick={handlePrev} className="glitch-button">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <button type="button" onClick={handlePrev} className="glitch-button w-[calc(50%-0.375rem)] justify-center sm:w-auto">
             PREV
           </button>
-          <p className="micro-tag border border-unbeatable-white/25 bg-industrial-black/70 px-3 py-2 text-unbeatable-white/78">
+          <button type="button" onClick={handleNext} className="glitch-button w-[calc(50%-0.375rem)] justify-center sm:order-3 sm:w-auto">
+            NEXT
+          </button>
+          <p className="micro-tag order-3 w-full border border-unbeatable-white/25 bg-industrial-black/70 px-3 py-2 text-center text-unbeatable-white/78 sm:order-2 sm:w-auto">
             [SHOWING_{String(startIndex + 1).padStart(2, "0")}-{String(
               ((startIndex + visibleCount - 1) % frames.length) + 1,
             ).padStart(2, "0")} / {String(frames.length).padStart(2, "0")}]
           </p>
-          <button type="button" onClick={handleNext} className="glitch-button">
-            NEXT
-          </button>
         </div>
       ) : null}
     </section>

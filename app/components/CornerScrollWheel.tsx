@@ -28,7 +28,7 @@ export default function CornerScrollWheel() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[4] overflow-hidden" aria-hidden>
       <motion.div
-        className="absolute -bottom-[8rem] -right-[8rem] h-[34rem] w-[34rem] md:-bottom-[10rem] md:-right-[10rem] md:h-[44rem] md:w-[44rem]"
+        className="absolute -bottom-[5.5rem] -right-[5.5rem] h-[22rem] w-[22rem] sm:-bottom-[8rem] sm:-right-[8rem] sm:h-[34rem] sm:w-[34rem] md:-bottom-[10rem] md:-right-[10rem] md:h-[44rem] md:w-[44rem]"
         style={{ rotate, opacity: 0.17 }}
       >
         <svg viewBox="0 0 400 400" className="h-full w-full" role="presentation" aria-hidden>

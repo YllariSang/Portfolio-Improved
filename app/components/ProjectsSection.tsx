@@ -127,11 +127,11 @@ export default function ProjectsSection() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-16 w-full max-w-7xl px-6 md:mt-24"
+      className="mx-auto mt-12 w-full max-w-7xl px-4 sm:mt-16 sm:px-6 md:mt-24"
     >
-      <div className="chamfer-panel px-6 py-8 md:px-8 md:py-10">
-        <div className="projects-heading flex items-center justify-between gap-4">
-          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-4 py-2 text-2xl font-black uppercase tracking-[0.12em] text-zzz-yellow md:text-4xl">
+      <div className="chamfer-panel px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+        <div className="projects-heading flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-3 py-2 text-xl font-black uppercase tracking-[0.1em] text-zzz-yellow sm:px-4 sm:text-2xl sm:tracking-[0.12em] md:text-4xl">
             {projectsUi.title}
           </h2>
           <span className="micro-tag">{projectsUi.archiveTag}</span>
@@ -148,7 +148,7 @@ export default function ProjectsSection() {
             {projects.map((project, idx) => (
               <article
                 key={`${project.title}-${idx}`}
-                className="project-card relative min-w-[300px] shrink-0 snap-start overflow-hidden border border-unbeatable-white/30 bg-industrial-black/90 p-5 md:min-w-[340px]"
+                className="project-card relative min-w-[84vw] max-w-[84vw] shrink-0 snap-start overflow-hidden border border-unbeatable-white/30 bg-industrial-black/90 p-4 sm:min-w-[300px] sm:max-w-none sm:p-5 md:min-w-[340px]"
                 style={{
                   clipPath:
                     "polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)",
@@ -188,7 +188,7 @@ export default function ProjectsSection() {
                 <div className="mt-5">
                   <button
                     type="button"
-                    className="glitch-button"
+                    className="glitch-button w-full sm:w-auto"
                     onClick={() => handleOpenRequest(project.workUrl)}
                     aria-label={`Open ${project.title} on external site`}
                   >
@@ -243,7 +243,7 @@ export default function ProjectsSection() {
                 <div className="mt-5">
                   <button
                     type="button"
-                    className="glitch-button"
+                    className="glitch-button w-full sm:w-auto"
                     onClick={() => handleOpenRequest(project.workUrl)}
                     aria-label={`Open ${project.title} on external site`}
                   >
@@ -256,10 +256,10 @@ export default function ProjectsSection() {
         )}
 
         {canToggleProjects ? (
-          <div className="mt-6 flex">
+          <div className="mt-6 flex w-full sm:w-auto">
             <button
               type="button"
-              className="glitch-button"
+              className="glitch-button w-full sm:w-auto"
               onClick={() => setShowAllProjects((prev) => !prev)}
             >
               {showAllProjects ? projectsUi.collapseCta : projectsUi.expandCta}

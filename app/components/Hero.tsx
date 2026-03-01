@@ -52,11 +52,11 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto mt-4 w-full max-w-7xl px-6 md:mt-8"
+      className="relative mx-auto mt-3 w-full max-w-7xl px-4 sm:mt-4 sm:px-6 md:mt-8"
       aria-label="Hero section"
     >
       <div
-        className="hero-shell relative overflow-hidden border border-unbeatable-white/35 bg-industrial-black/90 px-6 py-14 md:px-10 md:py-20"
+        className="hero-shell relative overflow-hidden border border-unbeatable-white/35 bg-industrial-black/90 px-4 py-12 sm:px-6 sm:py-14 md:px-10 md:py-20"
         style={{
           clipPath:
             "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)",
@@ -64,31 +64,31 @@ export default function Hero() {
       >
         <div className="hero-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(240,240,240,0.08)_38%,transparent_45%)]" />
 
-        <span className="hero-label micro-label absolute left-5 top-5">{labels[0]}</span>
-        <span className="hero-label micro-label absolute right-5 top-5">{labels[1]}</span>
-        <span className="hero-label micro-label absolute bottom-5 left-5">{labels[2]}</span>
-        <span className="hero-label micro-label absolute bottom-5 right-5">{labels[3]}</span>
+        <span className="hero-label micro-label absolute left-4 top-4 sm:left-5 sm:top-5">{labels[0]}</span>
+        <span className="hero-label micro-label absolute right-4 top-4 sm:right-5 sm:top-5">{labels[1]}</span>
+        <span className="hero-label micro-label absolute bottom-4 left-4 hidden sm:inline sm:bottom-5 sm:left-5">{labels[2]}</span>
+        <span className="hero-label micro-label absolute bottom-4 right-4 hidden sm:inline sm:bottom-5 sm:right-5">{labels[3]}</span>
         <HudLottie />
 
-        <div className="hero-frame relative z-10 mx-auto flex max-w-6xl flex-col gap-8 border border-unbeatable-white/30 bg-industrial-black px-6 py-8 md:px-10 md:py-12">
-          <div className="hero-title -skew-x-12 border border-unbeatable-white/20 px-3 py-4 md:px-5 md:py-6">
+        <div className="hero-frame relative z-10 mx-auto flex max-w-6xl flex-col gap-6 border border-unbeatable-white/30 bg-industrial-black px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 md:px-10 md:py-12">
+          <div className="hero-title -skew-x-12 border border-unbeatable-white/20 px-2 py-3 sm:px-3 sm:py-4 md:px-5 md:py-6">
             <h1
-              className="glitch-heading persona-accent relative text-center text-5xl font-black uppercase tracking-[0.12em] text-zzz-yellow sm:text-6xl md:text-8xl"
+              className="glitch-heading persona-accent relative text-center text-4xl font-black uppercase tracking-[0.1em] text-zzz-yellow sm:text-6xl md:text-8xl"
               data-text={profile.displayName}
             >
               {profile.displayName}
             </h1>
           </div>
 
-          <p className="hero-copy mx-auto max-w-3xl text-center text-sm uppercase tracking-[0.18em] text-unbeatable-white/85 md:text-base">
+          <p className="hero-copy mx-auto max-w-3xl text-center text-xs uppercase tracking-[0.14em] text-unbeatable-white/85 sm:text-sm sm:tracking-[0.18em] md:text-base">
             {profile.heroSummary}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <a href="#projects" className="hero-cta glitch-button">
+            <a href="#projects" className="hero-cta glitch-button min-h-11">
               {creative.hero.ctas.works}
             </a>
-            <a href="#contacts" className="hero-cta glitch-button invert">
+            <a href="#contacts" className="hero-cta glitch-button invert min-h-11">
               {creative.hero.ctas.comms}
             </a>
           </div>
@@ -99,12 +99,18 @@ export default function Hero() {
         .micro-label {
           font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
             "Liberation Mono", "Courier New", monospace;
-          font-size: 0.65rem;
+          font-size: 0.56rem;
           line-height: 1;
           letter-spacing: 0.15em;
           font-variant: all-small-caps;
           color: rgba(240, 240, 240, 0.86);
           text-shadow: 1px 0 #f4ff33;
+        }
+
+        @media (min-width: 640px) {
+          .micro-label {
+            font-size: 0.65rem;
+          }
         }
 
         .glitch-heading::before,

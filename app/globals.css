@@ -888,6 +888,27 @@
 }
 
 @media (max-width: 840px) {
+  .layout-stage {
+    min-height: auto;
+    padding: 0.9rem 0;
+  }
+
+  .layout-stage::before {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .stage-header {
+    position: static;
+    top: auto;
+    width: calc(100% - 1.5rem);
+    margin: 0 auto 0.5rem;
+  }
+
+  .stage-index {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+  }
+
   .site-header-inner {
     grid-template-columns: 1fr;
     gap: 0.55rem;
@@ -901,6 +922,25 @@
   .site-status {
     width: min(280px, 100%);
     align-items: center;
+  }
+
+  .site-nav {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .glitch-button,
+  .site-nav-link,
+  .layout-rail-link,
+  .revolver-nav {
+    min-height: 42px;
+  }
+
+  .section-divider-label {
+    max-width: calc(100% - 1.2rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

@@ -46,11 +46,11 @@ export default function ContactSection() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-16 mb-16 w-full max-w-7xl px-6 md:mt-24 md:mb-24"
+      className="mx-auto mb-14 mt-12 w-full max-w-7xl px-4 sm:mb-16 sm:mt-16 sm:px-6 md:mb-24 md:mt-24"
     >
-      <div className="contact-shell chamfer-panel px-6 py-8 md:px-8 md:py-10">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-4 py-2 text-2xl font-black uppercase tracking-[0.12em] text-zzz-yellow md:text-4xl">
+      <div className="contact-shell chamfer-panel px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+        <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <h2 className="persona-accent -skew-x-12 border border-unbeatable-white/25 px-3 py-2 text-xl font-black uppercase tracking-[0.1em] text-zzz-yellow sm:px-4 sm:text-2xl sm:tracking-[0.12em] md:text-4xl">
             {creative.contact.title}
           </h2>
           <span className="micro-tag">{creative.contact.channelTag}</span>
@@ -60,14 +60,14 @@ export default function ContactSection() {
           {contact.intro}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href={`mailto:${contact.email}`} className="contact-action glitch-button text-unbeatable-white">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href={`mailto:${contact.email}`} className="contact-action glitch-button w-full justify-center text-unbeatable-white sm:w-auto">
             {creative.contact.ctas.email}
           </a>
-          <a href={contact.github} target="_blank" rel="noreferrer" className="contact-action glitch-button invert text-industrial-black">
+          <a href={contact.github} target="_blank" rel="noreferrer" className="contact-action glitch-button invert w-full justify-center text-industrial-black sm:w-auto">
             {creative.contact.ctas.github}
           </a>
-          <a href={contact.linkedin} target="_blank" rel="noreferrer" className="contact-action glitch-button text-unbeatable-white">
+          <a href={contact.linkedin} target="_blank" rel="noreferrer" className="contact-action glitch-button w-full justify-center text-unbeatable-white sm:w-auto">
             {creative.contact.ctas.linkedin}
           </a>
         </div>
