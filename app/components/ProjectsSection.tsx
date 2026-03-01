@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { portfolioData } from "../data/portfolioData";
 import LeavingSiteModal from "./LeavingSiteModal";
+import { emitRedirectSound } from "../lib/sfx";
 
 const projects = portfolioData.projects;
 const projectsUi = portfolioData.creative.projects;
@@ -31,6 +32,7 @@ export default function ProjectsSection() {
   }, []);
 
   const openExternalProject = (url: string) => {
+    emitRedirectSound();
     window.open(url, "_blank", "noopener,noreferrer");
   };
 

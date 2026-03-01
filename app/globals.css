@@ -64,6 +64,7 @@
   pointer-events: none;
   overflow: hidden;
   opacity: 0.72;
+  contain: layout paint style;
 }
 
 .ambient-layer {
@@ -71,6 +72,8 @@
   inset: -14% -8%;
   filter: blur(38px);
   mix-blend-mode: screen;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .ambient-layer-one {
@@ -104,11 +107,14 @@
       transparent 1px 26px
     );
   animation: mesh-breathe 14s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .ambient-particles {
   position: absolute;
   inset: 0;
+  contain: paint;
 }
 
 .ambient-particle {
@@ -119,6 +125,7 @@
   animation-name: particle-float;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+  will-change: transform, opacity;
 }
 
 @layer components {
@@ -587,6 +594,7 @@
     transparent 4px
   );
   mix-blend-mode: soft-light;
+  contain: paint;
 }
 
 @utility grain-overlay {
@@ -600,6 +608,7 @@
     radial-gradient(circle at 75% 75%, rgb(218 248 226 / 0.25) 0.6px, transparent 0);
   background-size: 3px 3px, 4px 4px;
   mix-blend-mode: soft-light;
+  contain: paint;
 }
 
 @utility scroll-progress {
@@ -612,6 +621,8 @@
   transform-origin: 0 50%;
   background: linear-gradient(90deg, rgb(218 248 226) 0%, rgb(141 231 163) 80%);
   box-shadow: 0 0 14px rgb(141 231 163 / 0.65);
+  will-change: transform;
+  contain: paint;
 }
 
 @utility ambient-orb {

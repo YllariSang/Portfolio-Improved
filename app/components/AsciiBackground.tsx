@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { memo } from "react";
 import type { CSSProperties } from "react";
 
 const particles = Array.from({ length: 18 }, (_, index) => ({
@@ -12,7 +13,16 @@ const particles = Array.from({ length: 18 }, (_, index) => ({
   delay: (index % 6) * 0.6,
 }));
 
-export default function AsciiBackground() {
+const particleStyles: CSSProperties[] = particles.map((particle) => ({
+  left: `${particle.x}%`,
+  top: `${particle.y}%`,
+  width: `${particle.size}px`,
+  height: `${particle.size}px`,
+  animationDuration: `${particle.duration}s`,
+  animationDelay: `${particle.delay}s`,
+}));
+
+function AsciiBackground() {
   const { scrollYProgress } = useScroll();
   const driftOne = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const driftTwo = useTransform(scrollYProgress, [0, 1], [0, 120]);
@@ -25,23 +35,16 @@ export default function AsciiBackground() {
       <motion.div className="ambient-mesh" style={{ rotate: glowRotate }} />
 
       <div className="ambient-particles">
-        {particles.map((particle) => (
+        {particles.map((particle, index) => (
           <span
             key={particle.id}
             className="ambient-particle"
-            style={
-              {
-                left: `${particle.x}%`,
-                top: `${particle.y}%`,
-                width: `${particle.size}px`,
-                height: `${particle.size}px`,
-                animationDuration: `${particle.duration}s`,
-                animationDelay: `${particle.delay}s`,
-              } as CSSProperties
-            }
+            style={particleStyles[index]}
           />
         ))}
       </div>
     </div>
   );
 }
+
+export default memo(AsciiBackground);

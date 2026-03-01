@@ -12,6 +12,7 @@ export default function ScrollFx() {
     }
 
     const element = progressRef.current;
+    let rafId = 0;
     gsap.set(element, { scaleX: 0, transformOrigin: "0% 50%" });
     const setProgress = gsap.quickTo(element, "scaleX", {
       duration: 0.22,
@@ -26,13 +27,28 @@ export default function ScrollFx() {
       setProgress(Math.max(0, Math.min(1, ratio)));
     };
 
+    const scheduleUpdate = () => {
+      if (rafId) {
+        return;
+      }
+
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        updateProgress();
+      });
+    };
+
     updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 

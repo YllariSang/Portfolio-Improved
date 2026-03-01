@@ -13,6 +13,7 @@ import SiteBootIntro from "./SiteBootIntro";
 import AsciiBackground from "./AsciiBackground";
 import StickyHeader from "./StickyHeader";
 import CornerScrollWheel from "./CornerScrollWheel";
+import { emitLoadingStart, emitLoadingStop } from "../lib/sfx";
 
 type VisualMode = "tactical" | "glitch";
 
@@ -24,6 +25,18 @@ export default function PortfolioShell({ onReturnToSelector }: PortfolioShellPro
   const rootRef = useRef<HTMLElement>(null);
   const [showIntro, setShowIntro] = useState(true);
   const [visualMode, setVisualMode] = useState<VisualMode>("tactical");
+
+  useEffect(() => {
+    if (showIntro) {
+      emitLoadingStart();
+    } else {
+      emitLoadingStop();
+    }
+
+    return () => {
+      emitLoadingStop();
+    };
+  }, [showIntro]);
 
   useEffect(() => {
     if (!showIntro) {

@@ -1,11 +1,21 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import PortfolioShell from "./components/PortfolioShell";
-import MinimalPortfolioShell from "./components/MinimalPortfolioShell";
+import SoundEffectsProvider from "./components/SoundEffectsProvider";
 import { portfolioData } from "./data/portfolioData";
+
+const PortfolioShell = dynamic(() => import("./components/PortfolioShell"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const MinimalPortfolioShell = dynamic(() => import("./components/MinimalPortfolioShell"), {
+  ssr: false,
+  loading: () => null,
+});
 
 type PortfolioMode = "minimal" | "neo";
 
@@ -92,7 +102,11 @@ function HomeContent() {
     return <MinimalPortfolioShell onReturnToSelector={handleReturnToSelector} />;
   }
 
-  return <PortfolioShell onReturnToSelector={handleReturnToSelector} />;
+  return (
+    <SoundEffectsProvider>
+      <PortfolioShell onReturnToSelector={handleReturnToSelector} />
+    </SoundEffectsProvider>
+  );
 }
 
 export default function Home() {

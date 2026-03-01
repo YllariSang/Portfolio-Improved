@@ -30,7 +30,9 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
       setLoading(false);
     }, 900);
 
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
