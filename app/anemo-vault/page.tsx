@@ -28,7 +28,7 @@ const ventiGallery = [
     alt: "Venti tribute frame four",
     tag: "[FRAME_04]",
     artist: "HoYoverse (Genshin Impact Official Art Team)",
-    sourceUrl: "https://x.com/GenshinImpact",
+    sourceUrl: "https://x.com/GenshinImpact ",
   },
 ];
 
