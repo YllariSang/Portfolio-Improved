@@ -38,9 +38,14 @@ export default function StickyHeader() {
 
         <div className="site-status">
           <span className="micro-tag">[SITE_MAP: ONLINE]</span>
-          <a href="/anemo-vault" className="secret-link micro-tag" aria-label="Open hidden Venti tribute page">
-            [FREEDOM]
-          </a>
+          <div className="site-secret-links">
+            <a href="/anemo-vault" className="secret-link micro-tag" aria-label="Open hidden Venti tribute page">
+              [FREEDOM]
+            </a>
+            <a href="/bad-apple" className="secret-link micro-tag" aria-label="Open Bad Apple ASCII animation page">
+              [BAD_APPLE]
+            </a>
+          </div>
           <motion.span className="site-progress" style={{ scaleX: progress }} />
         </div>
       </div>

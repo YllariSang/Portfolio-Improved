@@ -860,6 +860,12 @@
   gap: 0.22rem;
 }
 
+@utility site-secret-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 @utility secret-link {
   text-decoration: none;
   color: rgb(240 240 240 / 0.35);
@@ -922,6 +928,11 @@
   .site-status {
     width: min(280px, 100%);
     align-items: center;
+  }
+
+  .site-secret-links {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .site-nav {

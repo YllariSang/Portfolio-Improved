@@ -16,6 +16,7 @@
     "gsap": "^3.14.2",
     "lottie-react": "^2.4.1",
     "lucide-react": "latest",
+    "lz-string": "^1.5.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
