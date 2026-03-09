@@ -85,6 +85,20 @@ export const portfolioData = {
       workUrl: "https://yllaris.itch.io/crescere",
     },
     {
+      title: "EvEx Traxer",
+      stack: "React • Tailwind • Vite",
+      summary:
+        "A web application for tracking and managing events and expenses.",
+      workUrl: "https://github.com/YllariSang/EvEx-Traxer",
+    },
+    {
+      title: "Compass",
+      stack: "JavaScript • PHP",
+      summary:
+        "A web application for web travel and vlog.",
+      workUrl: "https://github.com/YllariSang/Compass",
+    },
+    {
       title: "Stylized 3D Chest",
       stack: "Blender • 3D Modeling",
       summary:
