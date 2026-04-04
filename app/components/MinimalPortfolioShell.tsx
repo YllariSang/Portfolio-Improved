@@ -16,8 +16,8 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [pendingWorkUrl, setPendingWorkUrl] = useState<string | null>(null);
   const [dontShowAgain, setDontShowAgain] = useState(false);
-  const { profile, tools, projects, contact, professional } = portfolioData;
-  const skills = tools.map((tool) => tool.name);
+  const { profile, skills, projects, contact, professional } = portfolioData;
+  const skillGroups = skills.groups;
   const visibleProjects = professional.projects.layoutMode === "expand" && !showAllProjects
     ? projects.slice(0, professional.projects.initialVisibleCount)
     : projects;
@@ -112,19 +112,24 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
   }
 
   return (
-    <main className="relative min-h-screen bg-black px-6 py-10 text-white md:px-10">
+    <main className="minimal-vfx-shell relative min-h-screen bg-black px-6 py-10 text-white md:px-10">
       <div className="pointer-events-none fixed inset-0 z-0 bg-black" />
+      <div className="minimal-vfx-grid" />
 
       <button
         type="button"
         onClick={onReturnToSelector}
-        className="fixed right-4 top-4 z-50 inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black md:right-8 md:top-6"
+        className="minimal-vfx-button !fixed right-4 top-4 z-[80] inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black md:right-8 md:top-6"
+        style={{
+          top: "calc(env(safe-area-inset-top, 0px) + 1rem)",
+          right: "calc(env(safe-area-inset-right, 0px) + 1rem)",
+        }}
       >
         {professional.backToSelectorCta}
       </button>
 
       <div className="relative z-10 mx-auto w-full max-w-5xl space-y-6">
-        <section className="border border-white/25 bg-black p-6 md:p-8">
+        <section className="minimal-vfx-panel border border-white/25 bg-black p-6 md:p-8">
           <h1 className="text-3xl font-semibold tracking-[0.01em] text-white md:text-5xl">
             {profile.displayName} Portfolio
           </h1>
@@ -133,21 +138,31 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
           </p>
         </section>
 
-        <section className="border border-white/25 bg-black p-6 md:p-8">
+        <section className="minimal-vfx-panel border border-white/25 bg-black p-6 md:p-8">
           <h2 className="text-lg font-semibold tracking-[0.01em] text-white">{professional.sections.skillsTitle}</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
-            {skills.map((skill) => (
-              <div
-                key={skill}
-                className="border border-white/20 bg-black px-3 py-2 text-xs tracking-[0.08em] text-white/86"
-              >
-                {skill}
-              </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {skillGroups.map((group) => (
+              <article key={group.category} className="minimal-vfx-panel border border-white/20 bg-black p-4">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-white/92">
+                  {group.category}
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <div
+                      key={`${group.category}-${item.name}`}
+                      className="minimal-vfx-chip inline-flex items-center gap-2 border border-white/20 bg-black px-2 py-1 text-[0.66rem] uppercase tracking-[0.1em] text-white/84"
+                    >
+                      <span className="text-white/72">{item.logo}</span>
+                      <span>{item.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="border border-white/25 bg-black p-6 md:p-8">
+        <section className="minimal-vfx-panel border border-white/25 bg-black p-6 md:p-8">
           <h2 className="text-lg font-semibold tracking-[0.01em] text-white">{professional.sections.projectsTitle}</h2>
           {professional.projects.layoutMode === "rail" ? (
             <div
@@ -159,7 +174,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
               {projects.map((project, idx) => (
                 <article
                   key={`${project.title}-${idx}`}
-                  className="min-w-[300px] shrink-0 snap-start border border-white/20 bg-black p-4"
+                  className="minimal-vfx-panel min-w-[300px] shrink-0 snap-start border border-white/20 bg-black p-4"
                   style={{
                     clipPath:
                       "polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)",
@@ -178,7 +193,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
                     <button
                       type="button"
                       onClick={() => handleOpenRequest(project.workUrl)}
-                      className="inline-flex items-center justify-center border border-white bg-black px-3 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+                      className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-black px-3 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
                       aria-label={`Open ${project.title} on external site`}
                     >
                       {professional.projects.openCaseCta}
@@ -192,7 +207,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
               {visibleProjects.map((project, idx) => (
                 <article
                   key={`${project.title}-${idx}`}
-                  className="border border-white/20 bg-black p-4"
+                  className="minimal-vfx-panel border border-white/20 bg-black p-4"
                   style={{
                     clipPath:
                       "polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)",
@@ -211,7 +226,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
                     <button
                       type="button"
                       onClick={() => handleOpenRequest(project.workUrl)}
-                      className="inline-flex items-center justify-center border border-white bg-black px-3 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+                      className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-black px-3 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
                       aria-label={`Open ${project.title} on external site`}
                     >
                       {professional.projects.openCaseCta}
@@ -227,7 +242,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
               <button
                 type="button"
                 onClick={() => setShowAllProjects((prev) => !prev)}
-                className="inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+                className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
               >
                 {showAllProjects
                   ? professional.projects.collapseCta
@@ -241,7 +256,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
           </p>
         </section>
 
-        <section className="border border-white/25 bg-black p-6 md:p-8">
+        <section className="minimal-vfx-panel border border-white/25 bg-black p-6 md:p-8">
           <h2 className="text-lg font-semibold tracking-[0.01em] text-white">{professional.sections.contactTitle}</h2>
           <p className="mt-3 text-sm text-white/78 md:text-base">
             {contact.intro}
@@ -249,7 +264,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
           <div className="mt-5 flex flex-wrap gap-3">
             <a
               href={`mailto:${contact.email}`}
-              className="inline-flex items-center justify-center border border-white bg-white px-4 py-2 text-xs font-medium tracking-[0.08em] text-black transition-colors duration-150 hover:bg-black hover:text-white"
+              className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-white px-4 py-2 text-xs font-medium tracking-[0.08em] text-black transition-colors duration-150 hover:bg-black hover:text-white"
             >
               {professional.ctas.email}
             </a>
@@ -257,7 +272,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
               href={contact.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+              className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
               aria-label="Open GitHub profile"
             >
               {professional.ctas.github}
@@ -266,7 +281,7 @@ export default function MinimalPortfolioShell({ onReturnToSelector }: MinimalPor
               href={contact.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+              className="minimal-vfx-button inline-flex items-center justify-center border border-white bg-black px-4 py-2 text-xs font-medium tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
               aria-label="Open LinkedIn profile"
             >
               {professional.ctas.linkedin}

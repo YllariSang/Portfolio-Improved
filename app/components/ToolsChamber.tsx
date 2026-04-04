@@ -6,13 +6,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { portfolioData } from "../data/portfolioData";
 
 const tools = portfolioData.tools;
+const skillGroups = portfolioData.skills.groups;
 const toolsUi = portfolioData.creative.tools;
 
 const reel = [...tools, ...tools];
 
 export default function ToolsChamber() {
   const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -30,14 +30,13 @@ export default function ToolsChamber() {
         ease: "power2.out",
       });
 
-      gsap.from(".tool-card", {
+      gsap.from(".skill-group-card", {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
         },
         opacity: 0,
         y: 44,
-        rotate: (index) => (index % 2 === 0 ? -8 : 8),
         stagger: 0.06,
         duration: 0.7,
         ease: "back.out(1.3)",
@@ -58,19 +57,6 @@ export default function ToolsChamber() {
 
     return () => ctx.revert();
   }, []);
-
-  const moveTrack = (direction: "left" | "right") => {
-    if (!trackRef.current) {
-      return;
-    }
-
-    const amount = Math.round(trackRef.current.clientWidth * 0.82);
-
-    trackRef.current.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <section
@@ -109,31 +95,15 @@ export default function ToolsChamber() {
           </div>
         </div>
 
-        <div className="revolver-nav-wrap mt-6 sm:mt-7">
-          <button type="button" className="revolver-nav" onClick={() => moveTrack("left")} aria-label="Scroll tools left">◀</button>
-          <span className="micro-tag">{toolsUi.scrollTag}</span>
-          <button type="button" className="revolver-nav" onClick={() => moveTrack("right")} aria-label="Scroll tools right">▶</button>
-        </div>
-
-        <div
-          ref={trackRef}
-          className="revolver-track mt-4 overflow-x-auto pb-2"
-          onWheel={(event) => {
-            if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-              event.currentTarget.scrollLeft += event.deltaY;
-            }
-          }}
-        >
-          {tools.map((tool, index) => (
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {skillGroups.map((group) => (
             <article
-              key={tool.name}
-              className="tool-card revolver-card shrink-0 border border-unbeatable-white/35 bg-industrial-black px-4 py-5"
-              style={{ transform: `rotate(${index % 2 === 0 ? -2 : 2}deg)` }}
+              key={group.category}
+              className="skill-group-card revolver-card border border-unbeatable-white/35 bg-industrial-black px-4 py-5"
               onMouseEnter={(event) => {
                 gsap.to(event.currentTarget, {
-                  scale: 1.05,
+                  scale: 1.03,
                   y: -6,
-                  rotate: 0,
                   duration: 0.25,
                   ease: "power2.out",
                 });
@@ -142,19 +112,27 @@ export default function ToolsChamber() {
                 gsap.to(event.currentTarget, {
                   scale: 1,
                   y: 0,
-                  rotate: index % 2 === 0 ? -2 : 2,
                   duration: 0.3,
                   ease: "power2.out",
                 });
               }}
             >
-              <div className="logo-badge">{tool.logo}</div>
+              <div className="logo-badge">SKL</div>
               <h3 className="mt-2 text-xl font-bold uppercase tracking-[0.08em] text-zzz-yellow">
-                {tool.name}
+                {group.category}
               </h3>
-              <p className="mt-1 text-xs uppercase tracking-[0.14em] text-unbeatable-white/75">
-                {tool.role}
-              </p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <div
+                    key={item.name}
+                    className="inline-flex items-center gap-2 border border-unbeatable-white/25 bg-black/40 px-2 py-1 text-[0.65rem] uppercase tracking-[0.12em] text-unbeatable-white/90"
+                  >
+                    <span className="text-zzz-yellow">{item.logo}</span>
+                    <span>{item.name}</span>
+                  </div>
+                ))}
+              </div>
             </article>
           ))}
         </div>

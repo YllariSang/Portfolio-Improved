@@ -1,3 +1,124 @@
+const skillGroups = [
+  {
+    category: "Language",
+    useCaseExample: "Building full-stack apps, scripts, and automation flows.",
+    items: [
+      { name: "TypeScript", role: "Type-Safe App Development", logo: "TS" },
+      { name: "JavaScript", role: "Web Runtime", logo: "JS" },
+      { name: "Python", role: "Automation and Scripting", logo: "PY" },
+      { name: "PHP", role: "Backend Development", logo: "PHP" },
+      { name: "Dart", role: "Cross-Platform App Language", logo: "DART" },
+      { name: "C#", role: "Game Development Scripting", logo: "C#" },
+      { name: "C++", role: "Low-Level Systems and Performance", logo: "C++" },
+      { name: "Bash", role: "Shell Automation", logo: "BS" },
+      { name: "Powershell", role: "Windows Task Automation", logo: "PS" },
+      { name: "HTML", role: "Web Markup", logo: "HTML" },
+      { name: "CSS", role: "UI Styling", logo: "CSS" },
+    ],
+  },
+  {
+    category: "Framework",
+    useCaseExample: "Shipping web and mobile products from idea to production.",
+    items: [
+      { name: "React", role: "UI Framework", logo: "RE" },
+      { name: "Next.js", role: "App Platform", logo: "NX" },
+      { name: "Laravel", role: "Backend Framework", logo: "LR" },
+      { name: "Flutter", role: "Mobile Development Framework", logo: "FL" },
+      { name: "Astro", role: "Static Site Framework", logo: "AST" },
+      { name: "Tailwind CSS", role: "Styling System", logo: "TW" },
+      { name: "Vite", role: "Frontend Build Tool", logo: "VITE" },
+    ],
+  },
+  {
+    category: "Database",
+    useCaseExample: "Designing scalable data layers and backend services.",
+    items: [
+      { name: "MySQL", role: "Relational Database", logo: "MY" },
+      { name: "MariaDB", role: "Relational Database", logo: "MDB" },
+      { name: "PostgreSQL", role: "Relational Database", logo: "PG" },
+      { name: "DynamoDB", role: "NoSQL Database", logo: "DDB" },
+      { name: "Redis", role: "In-Memory Cache and Store", logo: "RD" },
+      { name: "Neon", role: "Serverless Postgres Platform", logo: "NEON" },
+      { name: "Supabase", role: "Backend Platform", logo: "SUPA" },
+      { name: "NocoDB", role: "No-Code Data Layer", logo: "NDB" },
+      { name: "Baserow", role: "No-Code Database", logo: "BR" },
+    ],
+  },
+  {
+    category: "Engine",
+    useCaseExample: "Developing playable game prototypes and interactive experiences.",
+    items: [
+      { name: "Godot", role: "Game Engine", logo: "GD" },
+      { name: "Unity", role: "Game Engine", logo: "UN" },
+      { name: "Three.js", role: "3D Web Engine", logo: "3JS" },
+      { name: "Framer Motion", role: "UI Motion Engine", logo: "FM" },
+    ],
+  },
+  {
+    category: "Tooling and DevOps",
+    useCaseExample: "Building reliable pipelines, deployment flows, and local dev environments.",
+    items: [
+      { name: "Node.js", role: "Backend Runtime", logo: "ND" },
+      { name: "Docker", role: "Containerization", logo: "DK" },
+      { name: "Github", role: "Version Control", logo: "GH" },
+      { name: "CLI", role: "Command-Line Workflows", logo: "CLI" },
+      { name: "VS Code", role: "Primary IDE", logo: "VS" },
+      { name: "Cursor", role: "AI-Enhanced Code Editor", logo: "CUR" },
+      { name: "Nginx", role: "Web Server", logo: "NGX" },
+      { name: "Caddy", role: "Web Server", logo: "CAD" },
+      { name: "Railway", role: "Cloud Platform", logo: "RAIL" },
+    ],
+  },
+  {
+    category: "AI and Automation",
+    useCaseExample: "Integrating AI assistants, RAG pipelines, and automated operations.",
+    items: [
+      { name: "Ollama", role: "Local LLM Runtime", logo: "OLL" },
+      { name: "Hugging Face", role: "ML Platform", logo: "HF" },
+      { name: "OpenClaw AI", role: "AI Assistant", logo: "OC" },
+      { name: "RAG", role: "Knowledge Retrieval Pattern", logo: "RAG" },
+      { name: "N8N", role: "Workflow Automation", logo: "N8N" },
+      { name: "Power Automate", role: "Business Process Automation", logo: "PA" },
+      { name: "Grafana", role: "Monitoring and Analytics", logo: "GRA" },
+      { name: "Prometheus", role: "Metrics and Monitoring", logo: "PROM" },
+    ],
+  },
+  {
+    category: "Creative and Design",
+    useCaseExample: "Producing game art, 3D assets, UI concepts, and multimedia content.",
+    items: [
+      { name: "Blender", role: "3D Modeling", logo: "BL" },
+      { name: "Aseprite", role: "2D Pixel Art", logo: "AS" },
+      { name: "Krita", role: "2D Digital Art", logo: "KR" },
+      { name: "Figma", role: "UI and UX Prototyping", logo: "FG" },
+      { name: "Canva", role: "Design Platform", logo: "CN" },
+      { name: "DaVinci Resolve", role: "Video Editing", logo: "DR" },
+      { name: "Adobe Suite", role: "Creative Production Suite", logo: "AD" },
+    ],
+  },
+  {
+    category: "Business Systems and Productivity",
+    useCaseExample: "Managing operations, teams, documents, and planning workflows.",
+    items: [
+      { name: "Odoo", role: "ERP System", logo: "OD" },
+      { name: "ERPNext", role: "ERP System", logo: "ERP" },
+      { name: "Plane", role: "Project Management", logo: "PLAN" },
+      { name: "Affine", role: "Collaborative Workspace", logo: "AFF" },
+      { name: "Microsoft Suite", role: "Productivity Suite", logo: "MS" },
+      { name: "M365", role: "Cloud Productivity Suite", logo: "M365" },
+      { name: "MIT App Inventor", role: "Visual App Builder", logo: "MIT" },
+    ],
+  },
+  {
+    category: "Networking",
+    useCaseExample: "Prototyping network behavior and local infrastructure workflows.",
+    items: [
+      { name: "Cisco Packet Tracer", role: "Network Simulation", logo: "CPT" },
+      { name: "mDNS", role: "Local Discovery Protocol", logo: "MDNS" },
+    ],
+  },
+];
+
 export const portfolioData = {
   selector: {
     title: "Choose Portfolio View",
@@ -24,37 +145,11 @@ export const portfolioData = {
     professionalSummary:
       "I am Shawn Ashleigh Yllaris M. Cruz, a versatile creative developer with a passion for crafting immersive digital experiences. With a strong foundation in game development, full stack development, and 3D modeling, I specialize in bringing innovative ideas to life through code and design. My work is driven by a commitment to creativity, technical excellence, and delivering engaging solutions that resonate with users.",
   },
-  tools: [
-    { name: "TypeScript", role: "Primary Language", logo: "TS" },
-    { name: "JavaScript", role: "Web Runtime", logo: "JS" },
-    { name: "React", role: "UI Framework", logo: "RE" },
-    { name: "Next.js", role: "App Platform", logo: "NX" },
-    { name: "Tailwind CSS", role: "Styling System", logo: "TW" },
-    { name: "Framer Motion", role: "Motion Engine", logo: "FM" },
-    { name: "Node.js", role: "Backend Runtime", logo: "ND" },
-    { name: "Figma", role: "UI Prototyping", logo: "FG" },
-    { name: "Blender", role: "3D Modeling", logo: "BL" },
-    { name: "Godot", role: "Game Development", logo: "GD" },
-    { name: "Unity", role: "Tried for Game Development", logo: "UN" },
-    { name: "Aseprite", role: "2D Pixel Art", logo: "AS" },
-    { name: "Krita", role: "2D Digital Art", logo: "KR" },
-    { name: "VS Code", role: "IDE", logo: "VS" },
-    { name: "Cisco Packet Tracer", role: "Network Simulation", logo: "CP" },
-    { name: "Adobe Suite", role: "Creative Tools", logo: "AD" },
-    { name: "Microsoft Suite", role: "Productivity Suite", logo: "MS" },
-    { name: "Python", role: "Scripting Language", logo: "PY" },
-    { name: "C#", role: "Used for Unity", logo: "C#" },
-    { name: "DaVinci Resolve", role: "Video Editing", logo: "DR" },
-    { name: "C++", role: "Low-Level Programming", logo: "C++" },
-    { name: "Github", role: "Version Control", logo: "GH" },
-    { name: "Canva", role: "Design Platform", logo: "CN" },
-    { name: "PHP", role: "Backend Language", logo: "PHP" },
-    { name: "MySQL", role: "Database System", logo: "MY" },
-    { name: "HTML", role: "Markup Language", logo: "HTML" },
-    { name: "Laravel", role: "Backend Framework", logo: "LR" },
-    { name: "Three.js", role: "3D Library", logo: "3JS" },
-    
-  ],
+  skills: {
+    title: "Skill Matrix",
+    groups: skillGroups,
+  },
+  tools: skillGroups.flatMap((group) => group.items),
   projects: [
     {
       title: "Old Portfolio Site",
@@ -90,6 +185,13 @@ export const portfolioData = {
       summary:
         "A web application for tracking and managing events and expenses.",
       workUrl: "https://github.com/YllariSang/EvEx-Traxer",
+    },
+        {
+      title: "EvEx Traxer App",
+      stack: "Flutter • Dart",
+      summary:
+        "A mobile application for tracking and managing events and expenses.",
+      workUrl: "N/A",
     },
     {
       title: "Compass",
@@ -171,7 +273,7 @@ export const portfolioData = {
       },
     },
     tools: {
-      title: "Languages & Tools",
+      title: "My Skills",
       moduleTag: "[SYSTEM_MODULE: SKILL_TREE]",
       feedTag: "[RIZZ_KIT: LIVE]",
       scrollTag: "[SCROLL: WHEEL / BUTTONS]",
